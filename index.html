@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabian Quiroz - Programador & Desarrollador de Automatización</title>
+    <meta name="description" content="Programador y desarrollador de automatización profesional. Especializado en HTML, JavaScript, C++, Python y más. Transformando ideas en soluciones tecnológicas.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary: #d23eff;
+            --secondary: #0891b2;
+            --accent: #ea580c;
+            --text-dark: #1f2937;
+            --bg-light: #fafafa;
+            --nav-h: 72px; /* altura fija del nav para offset */
+        }
+        
+        /* Evita que el contenido quede oculto bajo el nav fijo */
+        html {
+            scroll-padding-top: calc(var(--nav-h) + 8px);
+        }
+        body {
+            padding-top: var(--nav-h);
+            font-family: 'Inter', sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .skill-icon {
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        
+        .skill-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+        }
+        
+        .social-link {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            height: var(--nav-h);
+        }
+
+        /* NAV layout: centered title, links on right */
+        .nav-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .nav-center {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none; /* para que no interfiera con enlaces */
+            font-weight: 700;
+            letter-spacing: .6px;
+        }
+        .nav-center .logo {
+            pointer-events: auto; /* si quieres que el logo sea clicable, anular */
+        }
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            gap: 1.75rem;
+            align-items: center;
+        }
+        .nav-right a {
+            pointer-events: auto;
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent); }
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particle-float 20s infinite linear;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Ensure each section has a safe top margin when anchored */
+        section {
+            scroll-margin-top: calc(var(--nav-h) + 8px);
+        }
+
+    </style>
+<base target="_blank">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation (mobile button on the left, title on the right) -->
+    <nav class="fixed top-0 left-0 right-0 nav-blur z-40">
+        <div class="nav-container">
+
+
+            <!-- Right: Portafolio title at the extreme right -->
+            <div class="nav-blur nav-container">
+                <a href="#home" class="logo text-2xl font-bold gradient-text">PORTAFOLIO PERSONAL</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (imagen removida, estructura optimizada y más compacta) -->
+    <section id="home" class="hero-bg relative overflow-hidden" style="min-height: calc(70vh - var(--nav-h)); scroll-margin-top: calc(var(--nav-h) + 12px);">
+        <!-- Particles behind everything -->
+        <div class="particles absolute inset-0 z-0 pointer-events-none" id="particles" aria-hidden="true"></div>
+
+        <div class="max-w-4xl mx-auto px-6 py-12 md:py-16 relative z-10">
+            <!-- Contenido centrado y compacto -->
+            <div class="flex flex-col items-center text-center text-white gap-4 md:gap-6 mx-auto max-w-2xl">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-0">
+                    Hola, soy <span class="text-orange-400">Fabian Quiroz</span>
+                </h1>
+
+                <div class="text-lg sm:text-2xl md:text-2xl font-mono typewriter w-full">
+                    Programador & Desarrollador
+                </div>
+
+                <p class="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed mb-2">
+                    Especializado en automatización y desarrollo de software. Transformo ideas complejas en soluciones tecnológicas eficientes y escalables. Creo experiencias digitales que marcan la diferencia.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2">
+                    <a href="#contact" class="bg-orange-500 hover:bg-orange-600 text-white px-6 sm:px-8 py-3 sm:py-3 rounded-lg font-semibold transition-all transform hover:scale-105 text-center">
+                        Contáctame
+                    </a>
+                    <a href="https://es.fiverr.com/s/xX2zvZQ" target="_blank" class="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-6 sm:px-8 py-3 sm:py-3 rounded-lg font-semibold transition-all text-center">
+                        Ver mi Fiverr
+                    </a>
+                </div>
+
+                <!-- Pequeña fila de tecnologías (oculta en pantallas muy pequeñas) -->
+                <div class="hidden sm:flex items-center justify-center gap-4 mt-4 w-full">
+                    <span class="text-white text-sm px-3 py-1 bg-white/10 rounded-full">HTML5</span>
+                    <span class="text-white text-sm px-3 py-1 bg-white/10 rounded-full">CSS3</span>
+                    <span class="text-white text-sm px-3 py-1 bg-white/10 rounded-full">JavaScript</span>
+                    <span class="text-white text-sm px-3 py-1 bg-white/10 rounded-full">Python</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 md:py-20 bg-white relative z-30" style="scroll-margin-top: calc(var(--nav-h) + 16px);">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12 md:mb-16 reveal">
+                <h2 class="text-3xl sm:text-4xl font-bold gradient-text mb-3 sm:mb-4">Habilidades</h2>
+                <p class="text-base sm:text-xl text-gray-600 max-w-2xl mx-auto">
+                    Trabajo con tecnologías modernas para construir soluciones robustas y escalables. A continuación algunas de mis habilidades principales.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- HTML5 -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <i class="fab fa-html5 text-6xl text-orange-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">HTML5</h3>
+                    <p class="text-gray-600 text-sm">Estructura semántica y accesible para web moderna</p>
+                </div>
+                
+                <!-- CSS3 -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <i class="fab fa-css3-alt text-6xl text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">CSS3</h3>
+                    <p class="text-gray-600 text-sm">Diseños responsivos y animaciones avanzadas</p>
+                </div>
+                
+                <!-- JavaScript -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <i class="fab fa-js-square text-6xl text-yellow-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">JavaScript</h3>
+                    <p class="text-gray-600 text-sm">Interactividad y lógica de aplicaciones web</p>
+                </div>
+                
+                <!-- Python -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <i class="fab fa-python text-6xl text-green-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Python</h3>
+                    <p class="text-gray-600 text-sm">Automatización y desarrollo backend eficiente</p>
+                </div>
+                
+                <!-- C++ -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <i class="fas fa-code text-6xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">C++</h3>
+                    <p class="text-gray-600 text-sm">Programación de alto rendimiento y sistemas</p>
+                </div>
+                
+                <!-- Node.js -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <i class="fab fa-node-js text-6xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Node.js</h3>
+                    <p class="text-gray-600 text-sm">Aplicaciones server-side y APIs robustas</p>
+                </div>
+                
+                <!-- n8n -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <div class="w-16 h-16 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-2xl">n8n</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">n8n</h3>
+                    <p class="text-gray-600 text-sm">Automatización de flujos de trabajo empresariales</p>
+                </div>
+                
+                <!-- SQL -->
+                <div class="skill-card glass-card p-6 rounded-xl text-center reveal">
+                    <div class="skill-icon mb-4">
+                        <i class="fas fa-database text-6xl text-gray-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">SQL</h3>
+                    <p class="text-gray-600 text-sm">Gestión y optimización de bases de datos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Servicios</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Soluciones tecnológicas adaptadas a tus necesidades específicas
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all reveal">
+                    <div class="text-4xl text-blue-600 mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Desarrollo Web</h3>
+                    <p class="text-gray-600 mb-6">Websites modernos, responsivos y optimizados para todos los dispositivos.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Diseño personalizado</li>
+                        <li>• Optimización SEO</li>
+                        <li>• Performance máxima</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all reveal">
+                    <div class="text-4xl text-green-600 mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Automatización</h3>
+                    <p class="text-gray-600 mb-6">Optimiza procesos repetitivos y aumenta la eficiencia de tu negocio.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Flujos automatizados</li>
+                        <li>• Integración de sistemas</li>
+                        <li>• Ahorro de tiempo</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all reveal">
+                    <div class="text-4xl text-purple-600 mb-4">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Software a Medida</h3>
+                    <p class="text-gray-600 mb-6">Aplicaciones personalizadas que se adaptan perfectamente a tus requerimientos.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Análisis de necesidades</li>
+                        <li>• Desarrollo integral</li>
+                        <li>• Soporte continuo</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all reveal">
+                    <div class="text-4xl text-orange-600 mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Consultoría</h3>
+                    <p class="text-gray-600 mb-6">Asesoramiento experto para tomar las mejores decisiones tecnológicas.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Evaluación técnica</li>
+                        <li>• Recomendaciones</li>
+                        <li>• Planificación estratégica</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold gradient-text mb-4">Conéctate Conmigo</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    ¿Listo para transformar tu idea en realidad? ¡Hablemos sobre tu proyecto!
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold mb-6">Información de Contacto</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fab fa-whatsapp text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">WhatsApp</p>
+                                <p class="text-gray-600">+593 96 276 1847</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-envelope text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Email</p>
+                                <p class="text-gray-600">fabianquirozrm17@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Ubicación</p>
+                                <p class="text-gray-600">Ecuador</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Links -->
+                <div class="reveal">
+                    <h3 class="text-2xl font-semibold mb-6">Redes Sociales</h3>
+                    <div class="grid grid-cols-3 gap-6">
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/593962761847" target="_blank" rel="noopener noreferrer" class="social-link bg-green-500 hover:bg-green-600 text-white p-6 rounded-xl text-center transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+                            <i class="fab fa-whatsapp text-4xl mb-2 block"></i>
+                            <p class="text-sm font-semibold">WhatsApp</p>
+                        </a>
+                        <!-- Email -->
+                        <a href="mailto:fabianquirozrm17@gmail.com" class="social-link bg-red-500 hover:bg-red-600 text-white p-6 rounded-xl text-center transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+                            <i class="fas fa-envelope text-4xl mb-2 block"></i>
+                            <p class="text-sm font-semibold">Email</p>
+                        </a>
+                        
+                        <!-- Fiverr -->
+                        <a href="https://es.fiverr.com/s/xX2zvZQ" target="_blank" rel="noopener noreferrer" class="social-link bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white p-6 rounded-xl text-center transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+                            <i class="fas fa-briefcase text-4xl mb-2 block"></i>
+                            <p class="text-sm font-semibold">Fiverr</p>
+                        </a>
+                        
+                        <!-- GitHub -->
+                        <a href="https://github.com/FabianQuirozrm" target="_blank" rel="noopener noreferrer" class="social-link bg-gray-800 hover:bg-gray-900 text-white p-6 rounded-xl text-center transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+                            <i class="fab fa-github text-4xl mb-2 block"></i>
+                            <p class="text-sm font-semibold">GitHub</p>
+                        </a>
+                        
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/quiroz.darwin.850649" target="_blank" rel="noopener noreferrer" class="social-link bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-xl text-center transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+                            <i class="fab fa-facebook text-4xl mb-2 block"></i>
+                            <p class="text-sm font-semibold">Facebook</p>
+                        </a>
+                        
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/yuzaki_naza__/" target="_blank" rel="noopener noreferrer" class="social-link bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white p-6 rounded-xl text-center transition-all transform hover:scale-105 flex flex-col items-center justify-center">
+                            <i class="fab fa-instagram text-4xl mb-2 block"></i>
+                            <p class="text-sm font-semibold">Instagram</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="mb-4">
+                <p class="text-lg font-semibold gradient-text">Fabian Quiroz</p>
+                <p class="text-gray-400">Programador & Desarrollador de Automatización</p>
+            </div>
+            <div class="border-t border-gray-700 pt-4">
+                <p class="text-gray-400">
+                    © 2025 Fabian Quiroz. Todos los derechos reservados. | Ecuador
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
